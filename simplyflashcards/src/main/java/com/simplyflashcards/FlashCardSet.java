@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FlashCardSet {
-    HashMap<String, String> metaData;
-
-    ArrayList<FlashCard> flashCardSet;
+    private HashMap<String, String> metaData;
+    private ArrayList<FlashCard> flashCardSet;
 
     public FlashCardSet() {
         metaData = new HashMap<String, String>();
@@ -28,6 +27,14 @@ public class FlashCardSet {
     public Boolean removeFlashcard(FlashCard fc) {
         return flashCardSet.remove(fc);
 
+    }
+
+    public String addMetaData(String key, String value){
+        return metaData.put(key, value);
+    }
+
+    public String removeMetaData(String key){
+        return metaData.remove(key);
     }
 
 }
