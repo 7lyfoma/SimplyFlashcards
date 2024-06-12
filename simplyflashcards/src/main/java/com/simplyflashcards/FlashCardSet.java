@@ -37,4 +37,9 @@ public class FlashCardSet {
         return metaData.remove(key);
     }
 
+    @Override
+    public String toString() {
+        return "FlashCardSet [metaData=" + metaData + ", flashCardSet=" + flashCardSet + "]";
+    }
+
 }

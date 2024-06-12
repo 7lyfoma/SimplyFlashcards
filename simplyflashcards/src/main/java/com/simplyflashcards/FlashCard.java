@@ -11,6 +11,10 @@ public class FlashCard {
         BackText = backText;
         BackImagePath = backImagePath;
     }
+    
+    public FlashCard() {
+    }
+
     public String getFrontText() {
         return FrontText;
     }
@@ -35,6 +39,14 @@ public class FlashCard {
     public void setBackImagePath(String backImagePath) {
         BackImagePath = backImagePath;
     }
+
+    @Override
+    public String toString() {
+        return "FlashCard [FrontText=" + FrontText + ", FrontImagePath=" + FrontImagePath + ", BackText=" + BackText
+                + ", BackImagePath=" + BackImagePath + "]";
+    }
+
+    
 
     
 }

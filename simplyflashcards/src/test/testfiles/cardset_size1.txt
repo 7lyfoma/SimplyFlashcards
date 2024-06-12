@@ -1,0 +1,12 @@
+name:cardset size 1
+;
+front
+back
+fimg
+bimg
+;
+f
+b
+1
+2
+;
