@@ -13,6 +13,11 @@ public class FlashCard {
     }
     
     public FlashCard() {
+        FrontText = "";
+        FrontImagePath = "";
+        BackText = "";
+        BackImagePath = "";
+        
     }
 
     public String getFrontText() {

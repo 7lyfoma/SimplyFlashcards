@@ -17,6 +17,8 @@ public class FileHandler {
 
             Boolean isMeta = true;
 
+            if (!scanner.hasNextLine()) throw new FileEmptyException();
+
             while(scanner.hasNextLine()){
                 String data = scanner.nextLine();
                 if (isMeta){
@@ -44,8 +46,13 @@ public class FileHandler {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return null;
         } catch (NoSuchElementException e) {
             System.err.println("Flashcard file improperly formatted");
+            return null;
+        } catch (FileEmptyException e) {
+            System.err.println("File is empty");
+            return null;
         } finally {
             if(null != scanner) scanner.close();
         }
