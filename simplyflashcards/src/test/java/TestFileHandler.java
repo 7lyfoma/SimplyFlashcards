@@ -526,4 +526,55 @@ public class TestFileHandler {
         assertEquals(fcs.getFlashCardSet().get(2), fcsCheck.getFlashCardSet().get(2));
 
     }
+
+    @Test
+    public void testCanDeleteCardset() throws IOException{
+        File f = File.createTempFile("temp", ".txt");
+
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("name", "temp");
+        fcs.addMetaData("filename", f.getAbsolutePath());
+
+        fcs.addFlashCard(new FlashCard("1", "2", "3","4"));
+        fcs.addFlashCard(new FlashCard("11", "21", "31","41"));
+        fcs.addFlashCard(new FlashCard("12", "22", "32","42"));
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertTrue(success);
+
+        Boolean deleteSuccess = FileHandler.deleteFlashCardSet(fcs);
+
+        assertTrue(success);
+
+        assertFalse(f.exists());
+
+    }
+
+    @Test
+    public void testDeletedCardSetBecomesInactive() throws IOException{
+        File f = File.createTempFile("temp", ".txt");
+
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("name", "temp");
+        fcs.addMetaData("filename", f.getAbsolutePath());
+
+        fcs.addFlashCard(new FlashCard("1", "2", "3","4"));
+        fcs.addFlashCard(new FlashCard("11", "21", "31","41"));
+        fcs.addFlashCard(new FlashCard("12", "22", "32","42"));
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertTrue(success);
+
+        FileHandler.deleteFlashCardSet(fcs);
+
+        assertFalse(fcs.getIsActive());
+   }
+    
+
+
+
 }

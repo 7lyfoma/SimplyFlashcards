@@ -118,4 +118,13 @@ public class FileHandler {
        
         return true;
     }
+
+    public static Boolean deleteFlashCardSet(FlashCardSet fcs){
+
+        File file = new File(fcs.getMetaData().get("filename"));
+
+        fcs.setIsActive(false);
+
+        return file.delete();
+    }
 }

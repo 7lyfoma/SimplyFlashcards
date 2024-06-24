@@ -6,6 +6,15 @@ import java.util.HashMap;
 public class FlashCardSet {
     private HashMap<String, String> metaData;
     private ArrayList<FlashCard> flashCardSet;
+    private Boolean isActive = true;
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
 
     public FlashCardSet() {
         metaData = new HashMap<String, String>();
