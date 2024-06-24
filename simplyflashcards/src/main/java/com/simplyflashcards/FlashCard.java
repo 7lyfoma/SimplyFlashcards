@@ -51,6 +51,40 @@ public class FlashCard {
                 + ", BackImagePath=" + BackImagePath + "]";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FlashCard other = (FlashCard) obj;
+        if (FrontText == null) {
+            if (other.FrontText != null)
+                return false;
+        } else if (!FrontText.equals(other.FrontText))
+            return false;
+        if (FrontImagePath == null) {
+            if (other.FrontImagePath != null)
+                return false;
+        } else if (!FrontImagePath.equals(other.FrontImagePath))
+            return false;
+        if (BackText == null) {
+            if (other.BackText != null)
+                return false;
+        } else if (!BackText.equals(other.BackText))
+            return false;
+        if (BackImagePath == null) {
+            if (other.BackImagePath != null)
+                return false;
+        } else if (!BackImagePath.equals(other.BackImagePath))
+            return false;
+        return true;
+    }
+
+    
+
     
 
     

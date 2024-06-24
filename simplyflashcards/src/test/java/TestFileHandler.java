@@ -446,4 +446,84 @@ public class TestFileHandler {
 
         f.delete();
     }
+
+    @Test
+    public void testTextOnlyCardSaved() throws IOException{
+        File f = File.createTempFile("temp", ".txt");
+
+        
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("name", "temp");
+        fcs.addMetaData("filename", f.getAbsolutePath());
+
+        fcs.addFlashCard(new FlashCard("1", "2", "",""));
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertTrue(success);
+
+        FlashCardSet fcsCheck = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+
+        assertEquals(fcs.getMetaData().get("name"), fcsCheck.getMetaData().get("name"));
+        assertEquals(fcs.getMetaData().get("filename"), fcsCheck.getMetaData().get("filename"));
+
+        assertEquals(fcs.getFlashCardSet().get(0), fcsCheck.getFlashCardSet().get(0));
+
+    }
+
+    @Test
+    public void testFullCardSaved() throws IOException{
+        File f = File.createTempFile("temp", ".txt");
+
+        
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("name", "temp");
+        fcs.addMetaData("filename", f.getAbsolutePath());
+
+        fcs.addFlashCard(new FlashCard("1", "2", "3","4"));
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertTrue(success);
+
+        FlashCardSet fcsCheck = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+
+        assertEquals(fcs.getMetaData().get("name"), fcsCheck.getMetaData().get("name"));
+        assertEquals(fcs.getMetaData().get("filename"), fcsCheck.getMetaData().get("filename"));
+
+        assertEquals(fcs.getFlashCardSet().get(0), fcsCheck.getFlashCardSet().get(0));
+
+    }
+
+
+    @Test
+    public void testManyCardsSaved() throws IOException{
+        File f = File.createTempFile("temp", ".txt");
+
+        
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("name", "temp");
+        fcs.addMetaData("filename", f.getAbsolutePath());
+
+        fcs.addFlashCard(new FlashCard("1", "2", "3","4"));
+        fcs.addFlashCard(new FlashCard("11", "21", "31","41"));
+        fcs.addFlashCard(new FlashCard("12", "22", "32","42"));
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertTrue(success);
+
+        FlashCardSet fcsCheck = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+
+        assertEquals(fcs.getMetaData().get("name"), fcsCheck.getMetaData().get("name"));
+        assertEquals(fcs.getMetaData().get("filename"), fcsCheck.getMetaData().get("filename"));
+
+        assertEquals(fcs.getFlashCardSet().get(0), fcsCheck.getFlashCardSet().get(0));
+        assertEquals(fcs.getFlashCardSet().get(1), fcsCheck.getFlashCardSet().get(1));
+        assertEquals(fcs.getFlashCardSet().get(2), fcsCheck.getFlashCardSet().get(2));
+
+    }
 }
