@@ -11,7 +11,7 @@ import com.simplyflashcards.FileHandler;
 import com.simplyflashcards.FlashCardSet;
 
 
-public class FileHandlerTests {
+public class TestFileHandler {
 
     @Test
     public void testEmptyCardsetCannotLoad() throws IOException{
