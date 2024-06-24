@@ -62,7 +62,7 @@
 
 
     <build>
-        <testSourceDirectory>/src/test</testSourceDirectory>
+        <!-- <testSourceDirectory>/src/test</testSourceDirectory> -->
         <plugins>
             <plugin>
             <!-- Build an executable JAR -->
