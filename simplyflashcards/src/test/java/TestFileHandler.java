@@ -31,11 +31,50 @@ public class TestFileHandler {
     }
 
     @Test
+    public void testMissingFilenameFieldCantLoad() throws IOException{
+        File f = File.createTempFile("temp", ".txt");
+        FileWriter fw = new FileWriter(f);
+
+        fw.write("name:cardset 1\r\n" +
+                        ";\r\n"
+                        );
+
+        fw.flush();
+        fw.close();
+
+       FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+
+       assertNull(fcs);
+
+       f.delete();
+    }
+
+    @Test
+    public void testMissingNameFieldCantLoad() throws IOException{
+        File f = File.createTempFile("temp", ".txt");
+        FileWriter fw = new FileWriter(f);
+
+        fw.write("filename:temp.txt\r\n" +
+                        ";\r\n"
+                        );
+
+        fw.flush();
+        fw.close();
+
+       FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+
+       assertNull(fcs);
+
+       f.delete();
+    }
+
+    @Test
     public void testMetaDataOnlyCardsetCanLoad() throws IOException{
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n"
                         );
 
@@ -59,6 +98,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -101,6 +141,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -125,6 +166,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -151,6 +193,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -176,6 +219,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         "\r\n" + 
                         "\r\n" + 
@@ -202,6 +246,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         "\r\n" + 
                         "back\r\n" + 
@@ -228,6 +273,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "\r\n" + 
@@ -254,6 +300,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         ";");
 
@@ -276,6 +323,7 @@ public class TestFileHandler {
         FileWriter fw = new FileWriter(f);
 
         fw.write("name:cardset 1\r\n" +
+                        "filename:temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 

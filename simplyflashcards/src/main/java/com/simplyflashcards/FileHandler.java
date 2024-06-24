@@ -59,6 +59,11 @@ public class FileHandler {
         } finally {
             if(null != scanner) scanner.close();
         }
+
+        if (!fcs.isValid()){
+            System.err.println("Flashcardset does not have neccessary metadata");
+            return null;
+        }
         
 
         return fcs;
@@ -66,6 +71,8 @@ public class FileHandler {
     }
 
     public static Boolean saveFlashCardSet(FlashCardSet fcs){
+
+
         String filename = fcs.getMetaData().get("filename");
 
         try {

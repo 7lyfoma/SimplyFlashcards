@@ -41,5 +41,14 @@ public class FlashCardSet {
     public String toString() {
         return "FlashCardSet [metaData=" + metaData + ", flashCardSet=" + flashCardSet + "]";
     }
+    /**
+     * Checks if flashcardset contains necessary metadata values
+     * @return Boolean
+     */
+    public Boolean isValid() {
+        if (!metaData.containsKey("name")) return false;
+        if (!metaData.containsKey("filename")) return false;
+        return true;
+    }
 
 }
