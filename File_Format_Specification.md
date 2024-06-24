@@ -1,9 +1,9 @@
 # File Format Specification For Flash Card files
 
-Metadata is stored at the top of the file in pairs seperated by colons
+Metadata is stored at the top of the file in pairs seperated by |
 The end of metadata is signalled by a semicolon
 
->Name:French Basics  
+>Name|French Basics  
 >;  
 
 FlashCards are stored in txt files formatted in the following way

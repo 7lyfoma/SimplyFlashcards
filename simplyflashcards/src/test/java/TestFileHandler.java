@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,6 +10,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.simplyflashcards.FileHandler;
+import com.simplyflashcards.FlashCard;
 import com.simplyflashcards.FlashCardSet;
 
 
@@ -35,7 +38,7 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
+        fw.write("name|cardset 1\r\n" +
                         ";\r\n"
                         );
 
@@ -54,7 +57,7 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("filename:temp.txt\r\n" +
+        fw.write("filename|temp.txt\r\n" +
                         ";\r\n"
                         );
 
@@ -73,8 +76,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n"
                         );
 
@@ -97,8 +100,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -140,8 +143,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -165,8 +168,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -192,8 +195,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -218,8 +221,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         "\r\n" + 
                         "\r\n" + 
@@ -245,8 +248,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         "\r\n" + 
                         "back\r\n" + 
@@ -272,8 +275,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "\r\n" + 
@@ -299,8 +302,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         ";");
 
@@ -322,8 +325,8 @@ public class TestFileHandler {
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
-        fw.write("name:cardset 1\r\n" +
-                        "filename:temp.txt\r\n" +
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
                         ";\r\n" + 
                         "front\r\n" + 
                         "back\r\n" + 
@@ -364,5 +367,83 @@ public class TestFileHandler {
        f.delete();
 
         
+    }
+
+    @Test
+    public void testCantSaveEmptyFcs(){
+        FlashCardSet fcs = new FlashCardSet();
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertFalse(success);
+    }
+
+    @Test
+    public void testCantSaveMissingNameFcs() throws IOException{
+        File f = File.createTempFile("temp", ".txt");
+        
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("filename", f.getAbsolutePath());
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertFalse(success);
+
+        f.delete();
+    }
+
+    @Test
+    public void testCantSaveMissingFilenameameFcs(){
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("name", "temp");
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertFalse(success);
+    }
+    
+    @Test
+    public void testCanSaveMinimumFcs() throws IOException{
+
+        File f = File.createTempFile("temp", ".txt");
+
+        
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("name", "temp");
+        fcs.addMetaData("filename", f.getAbsolutePath());
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertTrue(success);
+
+        f.delete();
+    }
+
+    @Test
+    public void testSaveMinimumFcsSavesCorrectValues() throws IOException{
+
+        File f = File.createTempFile("temp", ".txt");
+
+        
+        FlashCardSet fcs = new FlashCardSet();
+
+        fcs.addMetaData("name", "temp");
+        fcs.addMetaData("filename", f.getAbsolutePath());
+        
+        Boolean success = FileHandler.saveFlashCardSet(fcs);
+
+        assertTrue(success);
+
+        FlashCardSet fcsCheck = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+
+        assertEquals(fcs.getMetaData().get("name"), fcsCheck.getMetaData().get("name"));
+        assertEquals(fcs.getMetaData().get("filename"), fcsCheck.getMetaData().get("filename"));
+
+        
+
+        f.delete();
     }
 }

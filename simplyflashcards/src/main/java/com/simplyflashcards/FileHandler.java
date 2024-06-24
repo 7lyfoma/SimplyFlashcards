@@ -26,11 +26,17 @@ public class FileHandler {
                 String data = scanner.nextLine();
                 if (isMeta){
                     while (!data.equals(";")){
-                        String[] metaPair = data.split(":");
+                        System.out.println(data);
+                        // \\| needed for regex
+                        String[] metaPair = data.split("\\|");
+                        for (String i :metaPair){
+                            System.out.println(i);
+                        }
                         fcs.addMetaData(metaPair[0], metaPair[1]);
                         data = scanner.nextLine();
                     }
                     isMeta = false;
+                    System.out.println(fcs.getMetaData());
                 }
                 else {
                     int count = 0;
@@ -72,6 +78,11 @@ public class FileHandler {
 
     public static Boolean saveFlashCardSet(FlashCardSet fcs){
 
+        if (!fcs.isValid()){
+            System.err.println("fcs not valid");
+            return false;
+        }
+
 
         String filename = fcs.getMetaData().get("filename");
 
@@ -80,7 +91,7 @@ public class FileHandler {
 
             for (Iterator<String> iter = fcs.getMetaData().keySet().iterator(); iter.hasNext(); ) {
                 String key = iter.next();
-                fw.write(key + ":" + fcs.getMetaData().get(key) + "\n");
+                fw.write(key + "|" + fcs.getMetaData().get(key) + "\n");
             }
             fw.write(";\n");
             
