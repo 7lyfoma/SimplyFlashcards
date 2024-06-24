@@ -2,6 +2,9 @@ package com.simplyflashcards;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -60,5 +63,41 @@ public class FileHandler {
 
         return fcs;
        
+    }
+
+    public static Boolean saveFlashCardSet(FlashCardSet fcs){
+        String filename = fcs.getMetaData().get("filename");
+
+        try {
+            FileWriter fw = new FileWriter(filename, false); 
+
+            for (Iterator<String> iter = fcs.getMetaData().keySet().iterator(); iter.hasNext(); ) {
+                String key = iter.next();
+                fw.write(key + ":" + fcs.getMetaData().get(key) + "\n");
+            }
+            fw.write(";\n");
+            
+            for (FlashCard fc : fcs.getFlashCardSet()) {
+                fw.write(fc.getFrontText() + "\n");
+                fw.write(fc.getBackText() + "\n");
+                fw.write(fc.getFrontImagePath() + "\n");
+                fw.write(fc.getBackImagePath() + "\n");
+                fw.write(";\n");
+            }
+
+
+
+
+            fw.close();
+
+        }
+        catch (IOException e){
+            System.err.println("File could not be created");
+            return false;
+        }
+              
+       
+       
+        return true;
     }
 }
