@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -711,6 +714,58 @@ public class TestFileHandler {
         f.delete();
 
         
+    }
+
+    @Test
+    public void testEmptyDirectoryLoadsNothing() throws IOException{
+        FileHandler fh = new FileHandler();
+        File d = Files.createTempDirectory("tempd").toFile();
+        
+        ArrayList<HashMap<String, String>> metadatas = fh.getMetadatasFromDirectory(d.getAbsolutePath());
+
+        assertEquals(0, metadatas.size());
+    }
+
+    @Test
+    public void testMultipleFileDirectoryLoadsMetadata() throws IOException{
+        FileHandler fh = new FileHandler();
+        File d = Files.createTempDirectory("tempd").toFile();
+        
+
+        File f1=  File.createTempFile("temp1", ".txt", d);
+
+        File f2 = File.createTempFile("temp2", ".txt", d);
+
+        FileWriter fw1 = new FileWriter(f1);
+        FileWriter fw2 = new FileWriter(f2);
+
+
+        fw1.write("name|cardset 1\r\n" +
+                        "filename|temp1.txt\r\n" +
+                        ";");
+
+        fw2.write("name|cardset 2\r\n" +
+        "filename|temp2.txt\r\n" +
+        ";");
+
+        fw1.flush();
+        fw1.close();
+
+        fw2.flush();
+        fw2.close();
+
+        ArrayList<HashMap<String, String>> metadatas = fh.getMetadatasFromDirectory(d.getAbsolutePath());
+
+        assertEquals(2, metadatas.size());
+
+        assertEquals("cardset 1", metadatas.get(0).get("name"));
+        assertEquals("temp1.txt", metadatas.get(0).get("filename"));
+
+        
+        assertEquals("cardset 2", metadatas.get(1).get("name"));
+        assertEquals("temp2.txt", metadatas.get(1).get("filename"));
+
+
     }
 
     
