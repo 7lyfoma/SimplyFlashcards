@@ -18,13 +18,14 @@ public class TestFileHandler {
 
     @Test
     public void testEmptyCardsetCannotLoad() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
         fw.flush();
         fw.close();
 
-        FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
 
         assertNull(fcs);
 
@@ -35,6 +36,7 @@ public class TestFileHandler {
 
     @Test
     public void testMissingFilenameFieldCantLoad() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -45,7 +47,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-       FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+       FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
 
        assertNull(fcs);
 
@@ -54,6 +56,7 @@ public class TestFileHandler {
 
     @Test
     public void testMissingNameFieldCantLoad() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -64,7 +67,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-       FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+       FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
 
        assertNull(fcs);
 
@@ -73,6 +76,7 @@ public class TestFileHandler {
 
     @Test
     public void testMetaDataOnlyCardsetCanLoad() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -84,7 +88,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-       FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+       FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
        
        assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -97,6 +101,7 @@ public class TestFileHandler {
 
     @Test 
     public void testMultipleCardsCanLoad() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -117,7 +122,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-       FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+       FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
        
        assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -140,6 +145,7 @@ public class TestFileHandler {
 
     @Test 
     public void testImglessCardCanLoad()  throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -153,7 +159,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-        FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
         
         assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -165,6 +171,7 @@ public class TestFileHandler {
 
     @Test 
     public void testFrontImglessCardCanLoad()  throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -180,7 +187,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-        FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
         
         assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -192,6 +199,7 @@ public class TestFileHandler {
 
     @Test 
     public void testBackImglessCardCanLoad()  throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -206,7 +214,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-        FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
         
         assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -218,6 +226,7 @@ public class TestFileHandler {
 
     @Test 
     public void testTextlessCardCanLoad()  throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -233,7 +242,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-        FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
         
         assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -245,6 +254,7 @@ public class TestFileHandler {
 
     @Test 
     public void testFrontlessCardCanLoad()  throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -260,7 +270,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-        FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
         
         assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -272,6 +282,7 @@ public class TestFileHandler {
 
     @Test 
     public void testBacktlessCardCanLoad()  throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -287,7 +298,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-        FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
         
         assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -299,6 +310,7 @@ public class TestFileHandler {
 
     @Test 
     public void testEmptyCardCanLoad()  throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -310,7 +322,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-        FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
         
         assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -322,6 +334,7 @@ public class TestFileHandler {
 
     @Test 
     public void testMultipleIncompleteCardsCanLoad() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         FileWriter fw = new FileWriter(f);
 
@@ -344,7 +357,7 @@ public class TestFileHandler {
         fw.flush();
         fw.close();
 
-       FlashCardSet fcs = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+       FlashCardSet fcs = fh.loadFlashCardSet(f.getAbsolutePath());
        
        assertEquals(fcs.getMetaData().get("name"), "cardset 1");
 
@@ -371,22 +384,24 @@ public class TestFileHandler {
 
     @Test
     public void testCantSaveEmptyFcs(){
+        FileHandler fh = new FileHandler();
         FlashCardSet fcs = new FlashCardSet();
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertFalse(success);
     }
 
     @Test
     public void testCantSaveMissingNameFcs() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
         
         FlashCardSet fcs = new FlashCardSet();
 
         fcs.addMetaData("filename", f.getAbsolutePath());
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertFalse(success);
 
@@ -395,17 +410,19 @@ public class TestFileHandler {
 
     @Test
     public void testCantSaveMissingFilenameameFcs(){
+        FileHandler fh = new FileHandler();
         FlashCardSet fcs = new FlashCardSet();
 
         fcs.addMetaData("name", "temp");
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertFalse(success);
     }
     
     @Test
     public void testCanSaveMinimumFcs() throws IOException{
+        FileHandler fh = new FileHandler();
 
         File f = File.createTempFile("temp", ".txt");
 
@@ -415,7 +432,7 @@ public class TestFileHandler {
         fcs.addMetaData("name", "temp");
         fcs.addMetaData("filename", f.getAbsolutePath());
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertTrue(success);
 
@@ -424,6 +441,7 @@ public class TestFileHandler {
 
     @Test
     public void testSaveMinimumFcsSavesCorrectValues() throws IOException{
+        FileHandler fh = new FileHandler();
 
         File f = File.createTempFile("temp", ".txt");
 
@@ -433,11 +451,11 @@ public class TestFileHandler {
         fcs.addMetaData("name", "temp");
         fcs.addMetaData("filename", f.getAbsolutePath());
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertTrue(success);
 
-        FlashCardSet fcsCheck = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcsCheck = fh.loadFlashCardSet(f.getAbsolutePath());
 
         assertEquals(fcs.getMetaData().get("name"), fcsCheck.getMetaData().get("name"));
         assertEquals(fcs.getMetaData().get("filename"), fcsCheck.getMetaData().get("filename"));
@@ -449,6 +467,7 @@ public class TestFileHandler {
 
     @Test
     public void testTextOnlyCardSaved() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
 
         
@@ -459,11 +478,11 @@ public class TestFileHandler {
 
         fcs.addFlashCard(new FlashCard("1", "2", "",""));
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertTrue(success);
 
-        FlashCardSet fcsCheck = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcsCheck = fh.loadFlashCardSet(f.getAbsolutePath());
 
         assertEquals(fcs.getMetaData().get("name"), fcsCheck.getMetaData().get("name"));
         assertEquals(fcs.getMetaData().get("filename"), fcsCheck.getMetaData().get("filename"));
@@ -474,6 +493,7 @@ public class TestFileHandler {
 
     @Test
     public void testFullCardSaved() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
 
         
@@ -484,11 +504,11 @@ public class TestFileHandler {
 
         fcs.addFlashCard(new FlashCard("1", "2", "3","4"));
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertTrue(success);
 
-        FlashCardSet fcsCheck = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcsCheck = fh.loadFlashCardSet(f.getAbsolutePath());
 
         assertEquals(fcs.getMetaData().get("name"), fcsCheck.getMetaData().get("name"));
         assertEquals(fcs.getMetaData().get("filename"), fcsCheck.getMetaData().get("filename"));
@@ -500,6 +520,7 @@ public class TestFileHandler {
 
     @Test
     public void testManyCardsSaved() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
 
         
@@ -512,11 +533,11 @@ public class TestFileHandler {
         fcs.addFlashCard(new FlashCard("11", "21", "31","41"));
         fcs.addFlashCard(new FlashCard("12", "22", "32","42"));
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertTrue(success);
 
-        FlashCardSet fcsCheck = FileHandler.loadFlashCardSet(f.getAbsolutePath());
+        FlashCardSet fcsCheck = fh.loadFlashCardSet(f.getAbsolutePath());
 
         assertEquals(fcs.getMetaData().get("name"), fcsCheck.getMetaData().get("name"));
         assertEquals(fcs.getMetaData().get("filename"), fcsCheck.getMetaData().get("filename"));
@@ -529,6 +550,7 @@ public class TestFileHandler {
 
     @Test
     public void testCanDeleteCardset() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
 
         FlashCardSet fcs = new FlashCardSet();
@@ -540,13 +562,13 @@ public class TestFileHandler {
         fcs.addFlashCard(new FlashCard("11", "21", "31","41"));
         fcs.addFlashCard(new FlashCard("12", "22", "32","42"));
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertTrue(success);
 
-        Boolean deleteSuccess = FileHandler.deleteFlashCardSet(fcs);
+        Boolean deleteSuccess = fh.deleteFlashCardSet(fcs);
 
-        assertTrue(success);
+        assertTrue(deleteSuccess);
 
         assertFalse(f.exists());
 
@@ -554,6 +576,7 @@ public class TestFileHandler {
 
     @Test
     public void testDeletedCardSetBecomesInactive() throws IOException{
+        FileHandler fh = new FileHandler();
         File f = File.createTempFile("temp", ".txt");
 
         FlashCardSet fcs = new FlashCardSet();
@@ -565,11 +588,11 @@ public class TestFileHandler {
         fcs.addFlashCard(new FlashCard("11", "21", "31","41"));
         fcs.addFlashCard(new FlashCard("12", "22", "32","42"));
         
-        Boolean success = FileHandler.saveFlashCardSet(fcs);
+        Boolean success = fh.saveFlashCardSet(fcs);
 
         assertTrue(success);
 
-        FileHandler.deleteFlashCardSet(fcs);
+        fh.deleteFlashCardSet(fcs);
 
         assertFalse(fcs.getIsActive());
    }

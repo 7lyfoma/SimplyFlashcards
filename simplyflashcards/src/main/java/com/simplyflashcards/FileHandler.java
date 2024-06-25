@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class FileHandler {
-    public static FlashCardSet loadFlashCardSet(String filepath){
+    public FlashCardSet loadFlashCardSet(String filepath){
         FlashCardSet fcs = new FlashCardSet();
 
         System.out.println(filepath);
@@ -76,7 +76,7 @@ public class FileHandler {
        
     }
 
-    public static Boolean saveFlashCardSet(FlashCardSet fcs){
+    public Boolean saveFlashCardSet(FlashCardSet fcs){
 
         if (!fcs.isValid()){
             System.err.println("fcs not valid");
@@ -119,7 +119,7 @@ public class FileHandler {
         return true;
     }
 
-    public static Boolean deleteFlashCardSet(FlashCardSet fcs){
+    public Boolean deleteFlashCardSet(FlashCardSet fcs){
 
         File file = new File(fcs.getMetaData().get("filename"));
 
