@@ -9,7 +9,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class MainGUIFrame extends JFrame {
+public class GuiMainFrame extends JFrame {
 
     JLabel errorJLabel;
     
@@ -17,7 +17,7 @@ public class MainGUIFrame extends JFrame {
 
     GridBagConstraints c;
 
-    public MainGUIFrame(){
+    public GuiMainFrame(){
        
         //Error label is always there, invisble if not in use
         errorJLabel = new JLabel("Hello World");
