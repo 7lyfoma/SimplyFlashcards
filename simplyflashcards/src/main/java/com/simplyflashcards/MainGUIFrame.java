@@ -5,12 +5,15 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class MainGUIFrame extends JFrame {
 
     JLabel errorJLabel;
+    
+    JFileChooser fileChooser;
 
     GridBagConstraints c;
 
@@ -20,6 +23,8 @@ public class MainGUIFrame extends JFrame {
         errorJLabel = new JLabel("Hello World");
         errorJLabel.setForeground(Color.RED);
         errorJLabel.setFont(new Font(errorJLabel.getFont().getName(), errorJLabel.getFont().getStyle(), 18));
+
+        fileChooser = new JFileChooser();
 
         c = new GridBagConstraints();
 
@@ -34,7 +39,7 @@ public class MainGUIFrame extends JFrame {
         c.weighty = 0.1;
         c.gridx = 0;
         c.gridy = 1;
-        add(errorJLabel,c);
+        add(fileChooser,c);
 
         // Set constraints back to default so panels that replace the login panel go in the same place
         c.anchor = GridBagConstraints.PAGE_START;
