@@ -4,15 +4,59 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class FileHandler {
+
+    public HashMap<String, String> loadFlashCardSetMetadata(String filepath){
+        FlashCardSet fcs = new FlashCardSet(); //Use flashcard set so we can use its isvalid method
+
+        File file = new File(filepath);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+            
+            if (!scanner.hasNextLine()) throw new FileEmptyException();
+            String data = scanner.nextLine();
+            
+            while (!data.equals(";")){
+                // \\| needed for regex
+                String[] metaPair = data.split("\\|");
+                for (String i :metaPair){
+                    System.out.println(i);
+                }
+                fcs.addMetaData(metaPair[0], metaPair[1]);
+
+                if (!scanner.hasNextLine()) throw new NoSuchElementException();
+                data = scanner.nextLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (NoSuchElementException e) {
+            System.err.println("Flashcard file improperly formatted");
+            return null;
+        } catch (FileEmptyException e) {
+            System.err.println("File is empty");
+            return null;
+        } finally {
+            if(null != scanner) scanner.close();
+        }
+
+        if (!fcs.isValid()){
+            System.err.println("Flashcardset does not have neccessary metadata");
+            return null;
+        }
+        return fcs.getMetaData();
+    }
+
+
     public FlashCardSet loadFlashCardSet(String filepath){
         FlashCardSet fcs = new FlashCardSet();
 
-        System.out.println(filepath);
         File file = new File(filepath);
         Scanner scanner = null;
         try {
