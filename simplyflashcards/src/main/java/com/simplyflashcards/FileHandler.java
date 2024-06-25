@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -172,5 +173,22 @@ public class FileHandler {
         fcs.setIsActive(false);
 
         return file.delete();
+    }
+
+    public ArrayList<HashMap<String, String>> getMetadatasFromDirectory(String directorypath){
+        ArrayList<HashMap<String, String>> metadatas = new ArrayList<HashMap<String, String>>();
+
+        File d = new File(directorypath);
+
+        if (!d.isDirectory()) return null;
+
+        File[] files = d.listFiles();
+
+        for (File f : files){
+            metadatas.add(this.loadFlashCardSetMetadata(f.getAbsolutePath()));
+        }
+
+
+        return metadatas;
     }
 }
