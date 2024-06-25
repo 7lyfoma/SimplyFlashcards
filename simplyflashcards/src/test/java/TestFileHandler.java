@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -15,6 +16,121 @@ import com.simplyflashcards.FlashCardSet;
 
 
 public class TestFileHandler {
+
+    @Test
+    public void testEmptyCardsetCannotLoadMetadata() throws IOException{
+        FileHandler fh = new FileHandler();
+        File f = File.createTempFile("temp", ".txt");
+        FileWriter fw = new FileWriter(f);
+
+        fw.flush();
+        fw.close();
+
+        HashMap<String, String> metadata = fh.loadFlashCardSetMetadata(f.getAbsolutePath());
+
+        assertNull(metadata);
+
+        f.delete();
+
+       
+    }
+
+    @Test
+    public void testMissingFilenameFieldCantLoadMetadata() throws IOException{
+        FileHandler fh = new FileHandler();
+        File f = File.createTempFile("temp", ".txt");
+        FileWriter fw = new FileWriter(f);
+
+        fw.write("name|cardset 1\r\n" +
+                        ";\r\n"
+                        );
+
+        fw.flush();
+        fw.close();
+
+        HashMap<String, String> metadata = fh.loadFlashCardSetMetadata(f.getAbsolutePath());
+
+        assertNull(metadata);
+
+        f.delete();
+    }
+
+    @Test
+    public void testMissingNameFieldCantLoadMetadata() throws IOException{
+        FileHandler fh = new FileHandler();
+        File f = File.createTempFile("temp", ".txt");
+        FileWriter fw = new FileWriter(f);
+
+        fw.write("filename|temp.txt\r\n" +
+                        ";\r\n"
+                        );
+
+        fw.flush();
+        fw.close();
+
+        HashMap<String, String> metadata = fh.loadFlashCardSetMetadata(f.getAbsolutePath());
+
+        assertNull(metadata);
+
+        f.delete();
+    }
+
+    @Test
+    public void testMetaDataOnlyCardsetCanLoadMetadata() throws IOException{
+        FileHandler fh = new FileHandler();
+        File f = File.createTempFile("temp", ".txt");
+        FileWriter fw = new FileWriter(f);
+
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
+                        ";\r\n"
+                        );
+
+        fw.flush();
+        fw.close();
+
+        HashMap<String, String> metadata = fh.loadFlashCardSetMetadata(f.getAbsolutePath());
+
+       
+       assertEquals("cardset 1",metadata.get("name"));
+       assertEquals("temp.txt", metadata.get("filename"));
+
+       f.delete();
+    }
+    
+
+    @Test 
+    public void testMultipleCardsCanLoadMetadata() throws IOException{
+        FileHandler fh = new FileHandler();
+        File f = File.createTempFile("temp", ".txt");
+        FileWriter fw = new FileWriter(f);
+
+        fw.write("name|cardset 1\r\n" +
+                        "filename|temp.txt\r\n" +
+                        ";\r\n" + 
+                        "front\r\n" + 
+                        "back\r\n" + 
+                        "fimg\r\n" + 
+                        "bimg\r\n" + 
+                        ";\r\n" + 
+                        "f\r\n" + 
+                        "b\r\n" + 
+                        "1\r\n" + 
+                        "2\r\n" + 
+                        ";");
+
+        fw.flush();
+        fw.close();
+
+        HashMap<String, String> metadata = fh.loadFlashCardSetMetadata(f.getAbsolutePath());
+       
+        assertEquals("cardset 1",metadata.get("name"));
+        assertEquals("temp.txt", metadata.get("filename"));
+
+        f.delete();
+
+        
+    }
 
     @Test
     public void testEmptyCardsetCannotLoad() throws IOException{

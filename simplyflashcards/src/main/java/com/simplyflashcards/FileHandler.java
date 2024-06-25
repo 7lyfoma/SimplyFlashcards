@@ -21,6 +21,7 @@ public class FileHandler {
             
             if (!scanner.hasNextLine()) throw new FileEmptyException();
             String data = scanner.nextLine();
+            System.out.println(data);
             
             while (!data.equals(";")){
                 // \\| needed for regex
@@ -32,6 +33,7 @@ public class FileHandler {
 
                 if (!scanner.hasNextLine()) throw new NoSuchElementException();
                 data = scanner.nextLine();
+                System.out.println(data);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
