@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-    //Testing access from new laptop
-
     public HashMap<String, String> loadFlashCardSetMetadata(String filepath){
         FlashCardSet fcs = new FlashCardSet(); //Use flashcard set so we can use its isvalid method
 
