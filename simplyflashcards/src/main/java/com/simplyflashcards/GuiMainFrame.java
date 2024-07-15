@@ -21,10 +21,11 @@ public class GuiMainFrame extends JFrame {
        
         //Error label is always there, invisble if not in use
         errorJLabel = new JLabel("Hello World");
+        errorJLabel.setName("ErrorLabel");
         errorJLabel.setForeground(Color.RED);
         errorJLabel.setFont(new Font(errorJLabel.getFont().getName(), errorJLabel.getFont().getStyle(), 18));
 
-        fileChooser = new JFileChooser();
+        //fileChooser = new JFileChooser();
 
         c = new GridBagConstraints();
 
@@ -39,7 +40,7 @@ public class GuiMainFrame extends JFrame {
         c.weighty = 0.1;
         c.gridx = 0;
         c.gridy = 1;
-        add(fileChooser,c);
+        add(errorJLabel,c);
 
         // Set constraints back to default so panels that replace the login panel go in the same place
         c.anchor = GridBagConstraints.PAGE_START;
