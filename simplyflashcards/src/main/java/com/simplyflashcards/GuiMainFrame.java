@@ -13,19 +13,19 @@ public class GuiMainFrame extends JFrame {
 
     JLabel errorJLabel;
     
-    JFileChooser fileChooser;
+    GuiFileChoosePanel fileChoosePanel;
 
     GridBagConstraints c;
 
     public GuiMainFrame(){
        
         //Error label is always there, invisble if not in use
-        errorJLabel = new JLabel("Hello World");
+        errorJLabel = new JLabel("");
         errorJLabel.setName("ErrorLabel");
         errorJLabel.setForeground(Color.RED);
         errorJLabel.setFont(new Font(errorJLabel.getFont().getName(), errorJLabel.getFont().getStyle(), 18));
 
-        //fileChooser = new JFileChooser();
+        fileChoosePanel = new GuiFileChoosePanel();
 
         c = new GridBagConstraints();
 
@@ -48,6 +48,7 @@ public class GuiMainFrame extends JFrame {
         c.weighty = 1;
         c.gridx = 0;
         c.gridy = 0;
+        add(fileChoosePanel);
 
         setVisible(true);
 

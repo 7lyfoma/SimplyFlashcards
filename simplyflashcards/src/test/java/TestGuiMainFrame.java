@@ -23,8 +23,8 @@ public class TestGuiMainFrame extends AssertJSwingJUnitTestCase {
     }
   
     @Test
-    public void shouldCopyTextInLabelWhenClickingButton() {
-      window.label("ErrorLabel").requireText("Hello World");
+    public void testErrorLabelEmptyAtStart() {
+      window.label("ErrorLabel").requireText("");
     }
   }
   
