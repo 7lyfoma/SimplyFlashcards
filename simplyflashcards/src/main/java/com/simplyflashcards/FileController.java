@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class FileController {
-    private String directoryPath;
+    private String directoryPath = "";
     private FileHandler fh;
     private ArrayList<HashMap<String, String>> metadatas;
 
@@ -15,9 +15,6 @@ public class FileController {
 
     public FileController() {
         fh = new FileHandler();    
-        
-
-       // String appdata = System.getenv("appdata");
         File store = new File(storePath);
 
         Scanner scanner = null;
@@ -47,7 +44,6 @@ public class FileController {
             }
             
         }
-
         if (!directoryPath.equals("")){
             metadatas = fh.getMetadatasFromDirectory(directoryPath);
         }
