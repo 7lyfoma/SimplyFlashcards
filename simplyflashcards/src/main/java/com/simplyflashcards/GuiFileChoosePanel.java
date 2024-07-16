@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -13,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GuiFileChoosePanel extends JPanel{
-    public GuiFileChoosePanel (){
+    public GuiFileChoosePanel (ChooseDirectoryMethod ChooseDirectoryMethod){
         JLabel infoLabel = new JLabel("Please Choose Flash Card Folder");
         infoLabel.setName("FileChooseInfo");
 
@@ -34,7 +33,7 @@ public class GuiFileChoosePanel extends JPanel{
                     if (returnVal == JFileChooser.APPROVE_OPTION) {
                             String filepath = fileChooser.getSelectedFile().getAbsolutePath();
                             infoLabel.setText("You have chosen: " + filepath);
-                            System.out.println(filepath);
+                            ChooseDirectoryMethod.chooseDirectory(filepath);
                             
                         } else {
                             System.out.println("clso");
@@ -74,6 +73,10 @@ public class GuiFileChoosePanel extends JPanel{
         c.gridy = 2;
         add(backButton, c);
 
+    }
+
+    public interface ChooseDirectoryMethod {
+        void chooseDirectory(String dir);
     }
     
     

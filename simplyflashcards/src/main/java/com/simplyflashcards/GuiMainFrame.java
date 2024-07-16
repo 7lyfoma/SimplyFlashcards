@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 public class GuiMainFrame extends JFrame {
 
@@ -16,7 +17,11 @@ public class GuiMainFrame extends JFrame {
 
     GridBagConstraints c;
 
-    public GuiMainFrame(){
+    FileController fc;
+
+    public GuiMainFrame(FileController fc){
+
+        this.fc = fc;
        
         //Error label is always there, invisble if not in use
         errorJLabel = new JLabel("");
@@ -24,7 +29,7 @@ public class GuiMainFrame extends JFrame {
         errorJLabel.setForeground(Color.RED);
         errorJLabel.setFont(new Font(errorJLabel.getFont().getName(), errorJLabel.getFont().getStyle(), 18));
 
-        fileChoosePanel = new GuiFileChoosePanel();
+        fileChoosePanel = new GuiFileChoosePanel(this::chooseDirectory);
 
         c = new GridBagConstraints();
 
@@ -51,5 +56,10 @@ public class GuiMainFrame extends JFrame {
 
         setVisible(true);
 
+    }
+
+    private void chooseDirectory(String dir){
+        fc.setDirectoryPath(dir);
+        SwingUtilities.updateComponentTreeUI(this);
     }
 }

@@ -3,6 +3,7 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
 
+import com.simplyflashcards.FileController;
 import com.simplyflashcards.GuiMainFrame;
 
 //Skeleton for tests taken from
@@ -15,7 +16,8 @@ public class TestGuiMainFrame extends AssertJSwingJUnitTestCase {
   
     @Override
     protected void onSetUp() {
-      GuiMainFrame frame = GuiActionRunner.execute(() -> new GuiMainFrame());
+      FileController fc = new FileController();
+      GuiMainFrame frame = GuiActionRunner.execute(() -> new GuiMainFrame(fc));
       // IMPORTANT: note the call to 'robot()'
       // we must use the Robot from AssertJSwingJUnitTestCase
       window = new FrameFixture(robot(), frame);

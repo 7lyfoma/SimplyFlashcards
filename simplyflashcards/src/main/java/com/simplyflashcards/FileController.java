@@ -1,7 +1,6 @@
 package com.simplyflashcards;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -58,6 +57,8 @@ public class FileController {
         if (!directoryPath.equals("")){
             metadatas = fh.getMetadatasFromDirectory(directoryPath);
         }
+        System.out.println(directoryPath);
+        System.out.println(metadatas.size());
     }
 
     public ArrayList<HashMap<String, String>> getMetadatas() {
